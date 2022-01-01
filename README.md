@@ -35,6 +35,9 @@ List token accessors
 Create a token  
 `$ vault token create -display-name=name-to-display -id=super-secret -policy=new-policy`
 
+Lookup token  
+`$ vault token lookup <TOKEN-ID>`
+
 
 ## UserPass  
 Enable userpass engine  
@@ -69,6 +72,9 @@ Write approle secret
 Login with approle  
 `$ vault write auth/new-approle/login/ role_id=84a1ab27-...-643cab249769 secret_id=33d3fdf5-...-bd5a8043b7b9`
 
+Delete approle
+`vault delete auth/new-approle/role/new-app`
+
 ## Okta
 Octa account can be created for free on [Okta](http://developer.okta.com)  
 
@@ -91,6 +97,9 @@ List policies
 
 Create policy from a file  
 `$ vault policy write new-policy new-policy.hcl`
+
+Read policy
+`$ vault policy read new-policy`
 
 ## KV  
 
