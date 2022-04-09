@@ -1,6 +1,6 @@
 # HashiCorp Vault CLI Cheatsheet
 
-Tested on Vault 1.9  
+Tested on Vault 1.10  
 
 [Administration](#Administration)  
 Authentication  
@@ -14,6 +14,7 @@ Policy
 
 Secrets  
 [KV](#KV)  
+[Database](#Database)
 
 ## Administration 
 Init storage with 3/2 keys  
@@ -116,4 +117,42 @@ Read a secret
 `$ vault kv get new-secret/first`
 
 Delete a secret  
-`$ vault kv delete new-secret/first`
+`$ vault kv delete new-secret/first`  
+
+## Database  
+
+Enable Database secret engine  
+­`$ vault secrets enable -path=new-db database`  
+
+Create database configuration  
+```
+$ vault write new-db/config/mysql-database \
+  plugin_name=mysql-database-plugin \
+  connection_url="{{username}}:{{password}}@tcp(127.0.0.1:3306)/" \
+  allowed_roles="mysql-role" \
+  username="root" \
+  password="secret"
+  ```  
+Create the role, which creates a temporary DB user  
+
+```
+$ vault write new-db/roles/mysql-role \
+  db_name=mysql-database \
+  creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'%';" \
+  default_ttl="1h" \
+  max_ttl="24h"
+```  
+
+Create a user  
+`$ vault read new-db/creds/mysql-role`  
+
+Output example  
+```
+Key                Value
+---                -----
+lease_id           new-db/creds/mysql-role/zYD2zmOrvUdOSEs3SHPQvEjh
+lease_duration     1h
+lease_renewable    true
+password           H-qBRmuWyLEhc0Pr8I3F
+username           v-root-mysql-role-mJXckL8jit5FRf
+```  
