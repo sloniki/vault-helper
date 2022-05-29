@@ -73,8 +73,8 @@ Write approle secret
 Login with approle  
 `$ vault write auth/new-approle/login/ role_id=84a1ab27-...-643cab249769 secret_id=33d3fdf5-...-bd5a8043b7b9`
 
-Delete approle
-`vault delete auth/new-approle/role/new-app`
+Delete approle  
+`$ vault delete auth/new-approle/role/new-app`
 
 ## Okta
 Octa account can be created for free on [Okta](http://developer.okta.com)  
@@ -99,7 +99,7 @@ List policies
 Create policy from a file  
 `$ vault policy write new-policy new-policy.hcl`
 
-Read policy
+Read policy  
 `$ vault policy read new-policy`
 
 ## KV  
@@ -122,7 +122,7 @@ Delete a secret
 ## Database  
 
 Enable Database secret engine  
-­`$ vault secrets enable -path=new-db database`  
+`$ vault secrets enable -path=new-db database`  
 
 Create database configuration  
 ```
