@@ -113,6 +113,9 @@ Write a secret
 List secrets  
 `$ vault kv list new-secret`
 
+List secrets in a namespace  
+`$ vault kv list -namespace=ns01 new-secret`
+
 Read a secret  
 `$ vault kv get new-secret/first`
 
