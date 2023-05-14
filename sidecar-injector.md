@@ -139,6 +139,7 @@ spec:
       annotations:
         vault.hashicorp.com/agent-inject: 'true'
         vault.hashicorp.com/role: 'devweb-app'
+        vault.hashicorp.com/namespace: 'admin/project-01/ns1'
         vault.hashicorp.com/agent-pre-populate: 'false'
         vault.hashicorp.com/tls-skip-verify: 'true'
         vault.hashicorp.com/agent-inject-secret-credentials.txt: 'secret/data/devwebapp/config'
