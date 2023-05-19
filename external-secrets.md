@@ -1,5 +1,6 @@
 # Using External-Secrets for K8s integration
 
+Tested on HCP Vault 1.23.3 and k3s v1.26.4.
 ## Configure K8s cluster
 Install chart
 https://external-secrets.io/v0.8.1/introduction/getting-started/
@@ -10,7 +11,7 @@ helm repo add external-secrets https://charts.external-secrets.io
 helm install external-secrets \
    external-secrets/external-secrets \
     -n external-secrets \
-    --create-namespace \
+    --create-namespace
 ```
 
 Create service accounts and secrets  
@@ -21,15 +22,6 @@ kind: ServiceAccount
 metadata:
   name: vault-auth
   namespace: external-secrets
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: external-secrets-token
-  namespace: external-secrets
-  annotations:
-    kubernetes.io/service-account.name: external-secrets
-type: kubernetes.io/service-account-token
 ---
 apiVersion: v1
 kind: Secret
@@ -52,8 +44,16 @@ subjects:
   - kind: ServiceAccount
     name: vault-auth
     namespace: external-secrets
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-secrets-token
+  namespace: external-secrets
+  annotations:
+    kubernetes.io/service-account.name: external-secrets
+type: kubernetes.io/service-account-token
 ```
-
 
 ## Configure Vault
 
