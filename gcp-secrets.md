@@ -42,3 +42,25 @@ key_algorithm       KEY_ALG_RSA_2048
 key_type            TYPE_GOOGLE_CREDENTIALS_FILE
 private_key_data    ewogICJ0eXB...Bpcy5jb20iCn0K
 ```
+
+## For token
+```
+vault write gcp/static-account/vt-sa-01-token \
+service_account_email="vt-sa-01@my-project.iam.gserviceaccount.com" \
+secret_type="access_token"  \
+token_scopes="https://www.googleapis.com/auth/cloud-platform" \
+bindings=-<<EOF
+resource "//cloudresourcemanager.googleapis.com/projects/my-project" {
+roles = ["roles/viewer"]
+}
+EOF
+```
+Create the token:  
+```
+➜  ~ vault read gcp/static-account/tsa-01-token/token
+Key                   Value
+---                   -----
+expires_at_seconds    1697309729
+token                 ya29.c.b0Aaek ..... 3uJ1_bXt6qo23Z
+token_ttl             59m58s
+```
