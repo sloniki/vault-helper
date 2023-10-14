@@ -25,6 +25,16 @@ path "kvv2/metadata/webapp" {
 EOF
 ```
 
+### Configure target GCP Secrets policy
+
+```
+vault policy write webapp-ro - <<EOF
+path "gcp/static-account/tsa-01-token/*" {
+   capabilities = ["read"]
+}
+EOF
+```
+
 
 ### Configure k8s authentication on Vault
 
@@ -136,6 +146,23 @@ spec:
     name: vso-handled
 
 ```
+For GCP Secrets engine token  
+```
+...
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultDynamicSecret
+metadata:
+  name: vault-dynamic-secret-gcp
+spec:
+  vaultAuthRef: vault-auth
+  mount: gcp
+  path: static-account/tsa-01-token/token
+  destination:
+    create: true
+    name: dynamic-gcp
+```
+
 
 ### Validation
 
