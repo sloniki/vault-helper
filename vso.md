@@ -1,6 +1,11 @@
 ## Using Vault Secrets Operator on Kubernetes
 
 Inspired by https://developer.hashicorp.com/vault/tutorials/kubernetes/vault-secrets-operator  
+Used components:  
+* k3s v1.26.4
+* helm v3.12.3
+* vault v1.15.0
+* vault-secrets-operator v0.3.2
 
 ### Configure target kv secrets and policy
 
