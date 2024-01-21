@@ -4,10 +4,11 @@ Source: https://developer.hashicorp.com/vault/api-docs/secret/gcp
 
 Prerequisites  
 1. "Root" SA for Vault configuration with permissiosn  
-* Security Admin
-* Security Reviewr
-* Service Account Key Admin
-* Service Account Token Creator
+    "roles/iam.securityAdmin",
+    "roles/iam.securityReviewer",
+    "roles/iam.serviceAccountKeyAdmin",
+    "roles/iam.serviceAccountTokenCreator",
+    "roles/iam.serviceAccountAdmin",
 
 2. JSON with key from (1)
 3. Test SA, where we are managing keys - `vt-sa-01`
